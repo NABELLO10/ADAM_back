@@ -12,11 +12,9 @@ const obtenerUnidades = async () => {
     );
 
     const promesas = unidadesCeiba.map(async (unidad) => {
-   
-      const existenUnidades = await ADAM_unidades.findAll({});
-     
+       
       
-      if(existenUnidades.length > 0){
+  
         const existe = await ADAM_unidades.findOne({
           where: {
             device_id: unidad.DeviceID,
@@ -37,7 +35,7 @@ const obtenerUnidades = async () => {
            est_activo : 1            
          });
         }   
-      }      
+      
      
     });
 

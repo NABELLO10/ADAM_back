@@ -24,7 +24,6 @@ const obtenerAlertas = async () => {
       });
 
 
-
       const nuevaAlarma = await ADAM_alarmas_ceiba.create({
         id_ceiba: alarma.ID,
         evidencia: alarma.Name,
@@ -40,7 +39,7 @@ const obtenerAlertas = async () => {
         id_evento: alarma.Evtuuid,
         url_evidencia : "http://186.10.115.124:3113/evidence-center?eid=" + alarma.ID,
         estado: 8,
-        id_transportista : infoUnidad.id_transportista > 0 ? infoUnidad.id_transportista : 0
+        id_transportista : infoUnidad ? infoUnidad.id_transportista : 0
       });
 
       // Actualizar el campo est_procesada una vez creada la alarma
