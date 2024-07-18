@@ -5,8 +5,6 @@ import cron from "node-cron";
 import moment from "moment"; // Importar moment
 
 
-
-
 const obtenerAlertas = async () => {
   try {
     const alarmasCeiba = await dbCeiba.query(
@@ -63,7 +61,7 @@ const obtenerAlertas = async () => {
 };
 
 // cada 3 minutos
-cron.schedule("*/5 * * * *", () => {
+cron.schedule("*/1 * * * *", () => {
   console.log("Tarea obtener alarmas siendo ejecutada...");
   obtenerAlertas();
 });

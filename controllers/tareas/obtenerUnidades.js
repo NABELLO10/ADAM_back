@@ -12,9 +12,7 @@ const obtenerUnidades = async () => {
     );
 
     const promesas = unidadesCeiba.map(async (unidad) => {
-       
-      
-  
+               
         const existe = await ADAM_unidades.findOne({
           where: {
             device_id: unidad.DeviceID,
@@ -34,19 +32,16 @@ const obtenerUnidades = async () => {
            devicetype : "",          
            est_activo : 1            
          });
-        }   
-      
-     
+        }       
     });
 
     // Espera a que todas las promesas se resuelvan
     await Promise.all(promesas);
     console.log("Todas las unidades han sido procesadas y actualizadas");
- 
 };
 
 // cada 3 minutos
-cron.schedule("*/1 * * * *", () => {
+cron.schedule("*/30 * * * *", () => {
   console.log("Tarea obtener UNIDADES siendo ejecutada...");
   obtenerUnidades();
 });
