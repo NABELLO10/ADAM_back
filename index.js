@@ -14,8 +14,8 @@ import crudRoutes from "./routes/crudRoutes.js"
 import generalRoutes from "./routes/generalRoutes.js"
 import adamRoutes from "./routes/adamRoutes.js"
  
-import './controllers/tareas/obtenerToken.js'  
-import './controllers/tareas/obtenerGrupos.js'
+//import './controllers/tareas/obtenerToken.js'  
+//import './controllers/tareas/obtenerGrupos.js'
 import './controllers/tareas/obtenerUnidades.js' 
 import './controllers/tareas/Ceiba/obtenerAlertas.js' 
 
