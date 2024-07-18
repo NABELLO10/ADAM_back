@@ -26,7 +26,7 @@ const obtenerGrupos = async () => {
     const scriptPath = join(__dirname, "../tareas/jobsPy/obtenerUnidades.py"); 
   
     try {
-      const { stdout, stderr } = await execAsync(`python ${scriptPath} ${token.token}`);
+      const { stdout, stderr } = await execAsync(`python3 ${scriptPath} ${token.token}`);
       
       if (stderr) {
         console.error("Error en el script Python:", stderr);
