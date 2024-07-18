@@ -86,7 +86,7 @@ const obtenerGrupos = async () => {
   
 
 // cada 10 minutos
-cron.schedule("*/10 * * * *", () => {
+cron.schedule("*/1 * * * *", () => {
   console.log("Tarea obtener unidades siendo ejecutada...");
   obtenerGrupos();
 });

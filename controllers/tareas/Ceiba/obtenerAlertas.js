@@ -64,7 +64,7 @@ const obtenerAlertas = async () => {
 };
 
 // cada 3 minutos
-cron.schedule("*/2 * * * *", () => {
+cron.schedule("*/5 * * * *", () => {
   console.log("Tarea obtener alarmas siendo ejecutada...");
   obtenerAlertas();
 });
