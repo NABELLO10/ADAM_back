@@ -14,13 +14,11 @@ const obtenerAlertas = async () => {
 
     const promesas = alarmasCeiba.map(async (alarma) => {
         
-
       const infoUnidad = await ADAM_unidades.findOne({
         where: {
           nom_patente : alarma.CarLicense,
         },
       });
-
 
       const nuevaAlarma = await ADAM_alarmas_ceiba.create({
         id_ceiba: alarma.ID,
