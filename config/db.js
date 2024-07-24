@@ -26,7 +26,7 @@ export default db  */
 
  import { Sequelize } from "sequelize";
 
- const db = new Sequelize('IdFleetDB', 'userIdFleet', 'Idf.2023', {
+const db = new Sequelize('IdFleetDB', 'userIdFleet', 'IdF.2023', {
     dialect: 'mssql',
     host: 'hctec.database.windows.net',
     port: '1433',
@@ -34,15 +34,14 @@ export default db  */
     dialectOptions: {
         options: {
             requestTimeout: 60000, // 60 segundos
-        },
-    },
+        }
+    },  
     pool: {
         max: 5,
         min: 0,
         idle: 10000,
         acquire: 60000 // 60 segundos
-    }
-});
+    }})
 
 
 export default db 
