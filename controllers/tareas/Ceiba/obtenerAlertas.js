@@ -2,21 +2,19 @@ import dbCeiba from "../../../config/dbCeiba.js";
 import ADAM_alarmas_ceiba from "../../../models/ADAM_alarmas_ceiba.js";
 import ADAM_unidades from "../../../models/ADAM_unidades.js";
 import cron from "node-cron";
-import moment from "moment"; // Importar moment
-
+import moment from "moment";
 
 const obtenerAlertas = async () => {
   try {
     const alarmasCeiba = await dbCeiba.query(
-      "SELECT ID, Name, CarLicense, Device, StartTime, EndTime,UploadTime,AlarmType, (SELECT `strategy_alarmtype`.`AlarmTypeName` FROM `strategy_alarmtype` WHERE (`strategy_alarmtype`.`AlarmTypeID` = `evidence_data`.`AlarmType`)) as NomAlarma, Status, Run,Evtuuid FROM wcms4.evidence_data where est_procesada is null;",
+      "SELECT ID, Name, CarLicense, Device, StartTime, EndTime, UploadTime, AlarmType, (SELECT `strategy_alarmtype`.`AlarmTypeName` FROM `strategy_alarmtype` WHERE (`strategy_alarmtype`.`AlarmTypeID` = `evidence_data`.`AlarmType`)) as NomAlarma, Status, Run, Evtuuid FROM wcms4.evidence_data WHERE est_procesada IS NULL;",
       { type: dbCeiba.QueryTypes.SELECT }
     );
 
     const promesas = alarmasCeiba.map(async (alarma) => {
-        
       const infoUnidad = await ADAM_unidades.findOne({
         where: {
-          nom_patente : alarma.CarLicense,
+          nom_patente: alarma.CarLicense,
         },
       });
 
@@ -25,17 +23,17 @@ const obtenerAlertas = async () => {
         evidencia: alarma.Name,
         unidad: alarma.CarLicense,
         serie: alarma.Device,
-        inicio: moment(alarma.StartTime).format("DD-MM-YYYY HH:mm:ss"), // Formatear la fecha
-        fin: moment(alarma.EndTime).format("DD-MM-YYYY HH:mm:ss"), // Formatear la fecha
-        fecha_carga: moment(alarma.UploadTime).format("DD-MM-YYYY HH:mm:ss"), // Formatear la fecha
+        inicio: moment(alarma.StartTime).subtract(4, 'hours').format("DD-MM-YYYY HH:mm:ss"), // Restar 4 horas y formatear la fecha
+        fin: moment(alarma.EndTime).subtract(4, 'hours').format("DD-MM-YYYY HH:mm:ss"), // Restar 4 horas y formatear la fecha
+        fecha_carga: moment(alarma.UploadTime).subtract(4, 'hours').format("DD-MM-YYYY HH:mm:ss"), // Restar 4 horas y formatear la fecha
         tipo_alarma: alarma.AlarmType,
-        nom_tipo_alarma : alarma.NomAlarma,
+        nom_tipo_alarma: alarma.NomAlarma,
         nivel: alarma.Status,
         velocidad: alarma.Run,
         id_evento: alarma.Evtuuid,
-        url_evidencia : "http://186.10.115.124:3113/evidence-center?eid=" + alarma.ID,
+        url_evidencia: "http://186.10.115.124:3113/evidence-center?eid=" + alarma.ID,
         estado: 8,
-        id_transportista : infoUnidad ? infoUnidad.id_transportista : 0
+        id_transportista: infoUnidad ? infoUnidad.id_transportista : 0
       });
 
       // Actualizar el campo est_procesada una vez creada la alarma
