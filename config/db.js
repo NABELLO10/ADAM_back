@@ -31,7 +31,7 @@ const db = new Sequelize('IdFleetDB', 'userIdFleet', 'IdF.2023', {
     host: 'hctec.database.windows.net',
     port: '1433',
     logging: false,
-    timezone: '-04:00',
+    timezone: '+04:00',
     dialectOptions: {
         options: {
             requestTimeout: 60000, // 60 segundos
