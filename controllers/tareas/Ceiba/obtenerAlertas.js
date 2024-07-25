@@ -35,6 +35,7 @@ const obtenerAlertas = async () => {
         estado: 8,
         id_transportista: infoUnidad ? infoUnidad.id_transportista : 0
       });
+      
 
       // Actualizar el campo est_procesada una vez creada la alarma
       if (nuevaAlarma) {
